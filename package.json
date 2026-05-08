@@ -1,0 +1,28 @@
+{
+  "name": "student_productivity_api",
+  "version": "1.0.0",
+  "description": "Smart Student Productivity &amp; Time Management System: Students(Undergraduates) struggle with time management and productivity. This system helps them to organize tasks, set goals, prioritize work, and track progress.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nikeshala19/Student_Productivity_API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nikeshala19/Student_Productivity_API/issues"
+  },
+  "homepage": "https://github.com/Nikeshala19/Student_Productivity_API#readme",
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.6.2"
+  }
+}
