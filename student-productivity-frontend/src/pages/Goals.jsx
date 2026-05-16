@@ -48,8 +48,9 @@ export default function Goals() {
       setEditId(null);
       setShowForm(false);
       fetchGoals();
-    } catch {
-      alert("Something went wrong!");
+    } catch (error) {
+      const message = error?.response?.data?.message || error?.message || "Something went wrong!";
+      alert(message);
     }
     setLoading(false);
   };
