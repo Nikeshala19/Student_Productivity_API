@@ -53,6 +53,7 @@ This API can power any frontend dashboard or mobile application to give students
 | **Dev Server** | Nodemon |
 | **API Testing** | Postman |
 | **Version Control** | Git & GitHub |
+| **Frontend** | React.js + Tailwind CSS (Vite) |
 
 
 ## 📁 Project Structure
@@ -74,6 +75,19 @@ Student_Productivity_API/
 │   ├── goalRoutes.js            # Express routes for /api/goals
 │   ├── taskRoutes.js            # Express routes for /api/tasks
 │   └── sessionRoutes.js         # Express routes for /api/sessions
+│
+├── student-productivity-frontend/   # React.js frontend (Vite + Tailwind CSS)
+│   ├── src/
+│   │   ├── pages/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Goals.jsx
+│   │   │   ├── Tasks.jsx
+│   │   │   └── Sessions.jsx
+│   │   ├── components/
+│   │   │   └── Navbar.jsx
+│   │   └── services/
+│   │       └── api.js
+│   └── ...
 │
 ├── .env                         # Environment variables (not committed)
 ├── .gitignore
@@ -98,7 +112,6 @@ Student_Productivity_API/
 | `PUT` | `/api/goals/:id` | Update a goal by ID |
 | `DELETE` | `/api/goals/:id` | Delete a goal by ID |
 
-
 #### ➕ POST `/api/goals` — Create a Goal
 
 **Request Body:**
@@ -106,8 +119,8 @@ Student_Productivity_API/
 {
   "title": "Final Exam Preparation",
   "type": "exam",
-  "description": "Prepare for all Semester 4 final exams",
-  "deadline": "2026-06-30",
+  "description": "Prepare for all modules in Semester 2 final exams",
+  "deadline": "2026-06-15",
   "priority": "high"
 }
 ```
@@ -119,23 +132,23 @@ Student_Productivity_API/
 - `status` — *String, default: `active`* — one of: `active`, `completed`, `paused`
 - `priority` — *String, default: `medium`* — one of: `low`, `medium`, `high`
 
-**Success Response (`200`):**
-```json
-{
-  "_id": "664f1a2b3c4d5e6f7a8b9c0d",
-  "title": "Final Exam Preparation",
-  "type": "exam",
-  "description": "Prepare for all Semester 4 final exams",
-  "deadline": "2026-06-30T00:00:00.000Z",
-  "status": "active",
-  "priority": "high",
-  "createdAt": "2026-05-16T08:00:00.000Z"
-}
-```
-
 **Duplicate Error Response (`400`):**
 ```json
 { "message": "Goal already exists." }
+```
+
+#### ✏️ PUT `/api/goals/:id` — Update a Goal
+
+**Request Body:**
+```json
+{
+  "status": "active",
+  "title": "Web Services Individual Project",
+  "type": "project",
+  "description": "Complete ICA 03 project",
+  "deadline": "2026-05-16",
+  "priority": "high"
+}
 ```
 
 
@@ -155,11 +168,11 @@ Student_Productivity_API/
 **Request Body:**
 ```json
 {
-  "goalId": "664f1a2b3c4d5e6f7a8b9c0d",
-  "title": "Study Chapter 1 - Data Structures",
-  "module": "DSA",
+  "goalId": "6a07f3ad99f379fa31805dcc",
+  "title": "Study Chapter 1 - Introduction to Theory",
+  "module": "Web Services",
   "estimatedMinutes": 90,
-  "dueDate": "2026-06-01",
+  "dueDate": "2026-05-20",
   "priority": "high"
 }
 ```
@@ -174,6 +187,19 @@ Student_Productivity_API/
 - `priority` — *String, default: `medium`* — one of: `low`, `medium`, `high`
 - `completed` — *Boolean, default: false*
 
+#### ✏️ PUT `/api/tasks/:id` — Update a Task
+
+**Request Body:**
+```json
+{
+  "title": "Prepare presentation slides and testing the project",
+  "module": "Web Services Project",
+  "estimatedMinutes": 140,
+  "dueDate": "2026-05-16",
+  "priority": "high"
+}
+```
+
 #### ✔️ PATCH `/api/tasks/:id/complete` — Mark as Complete
 
 No request body needed. Automatically sets `completed: true` and records `completedAt` timestamp.
@@ -183,10 +209,10 @@ No request body needed. Automatically sets `completed: true` and records `comple
 {
   "message": "Task marked as complete.",
   "task": {
-    "_id": "664f1a2b3c4d5e6f7a8b9c0e",
-    "title": "Study Chapter 1 - Data Structures",
+    "_id": "6a07f6ea99f379fa31805dd2",
+    "title": "Prepare presentation slides and testing the project",
     "completed": true,
-    "completedAt": "2026-05-16T09:00:00.000Z"
+    "completedAt": "2026-05-16T04:58:57.942Z"
   }
 }
 ```
@@ -207,12 +233,12 @@ No request body needed. Automatically sets `completed: true` and records `comple
 **Request Body:**
 ```json
 {
-  "goalId": "664f1a2b3c4d5e6f7a8b9c0d",
-  "taskId": "664f1a2b3c4d5e6f7a8b9c0e",
+  "goalId": "6a07f3ad99f379fa31805dcc",
+  "taskId": "6a07f67899f379fa31805dd1",
   "startTime": "2026-05-16T08:00:00",
   "endTime": "2026-05-16T09:30:00",
   "durationMinutes": 90,
-  "notes": "Covered arrays and linked lists in depth",
+  "notes": "Covered Client-Server Models",
   "mood": "focused"
 }
 ```
@@ -225,6 +251,21 @@ No request body needed. Automatically sets `completed: true` and records `comple
 - `durationMinutes` — *Number, optional*
 - `notes` — *String, optional*
 - `mood` — *String, optional* — one of: `focused`, `distracted`, `tired`, `energized`
+
+#### ✏️ PUT `/api/sessions/:id` — Update a Session
+
+**Request Body:**
+```json
+{
+  "goalId": "6a07f3ad99f379fa31805dcc",
+  "taskId": "6a07f67899f379fa31805dd1",
+  "startTime": "2026-05-16T08:00:00",
+  "endTime": "2026-05-16T09:30:00",
+  "durationMinutes": 100,
+  "notes": "Covered OSI Models",
+  "mood": "energized"
+}
+```
 
 ---
 
@@ -261,7 +302,7 @@ cd Student_Productivity_API
 
 ---
 
-### 📦 Step 2 — Install Dependencies
+### 📦 Step 2 — Install Backend Dependencies
 
 ```bash
 npm install
@@ -287,27 +328,35 @@ MONGO_URL=mongodb://localhost:27017/studentproductivity
 
 > ⚠️ Never commit your `.env` file. It is already listed in `.gitignore`.
 
+---
 
+### 📦 Step 4 — Install Frontend Dependencies
+
+```bash
+cd student-productivity-frontend
+npm install
+```
+
+---
 
 ## ▶️ How to Run the Project
 
-### 🚀 Development Mode (with auto-restart)
+### 🚀 Run Backend (Development Mode)
 
 ```bash
 npm run dev
 ```
 
-This starts the server using **Nodemon**, which automatically restarts the server on any file change.
-
 ---
 
-### 🏁 Production Mode
+### 🖥️ Run Frontend
 
 ```bash
-npm start
+cd student-productivity-frontend
+npm run dev
 ```
 
-This runs the server using **Node.js** directly.
+Frontend runs at: `http://localhost:5173`
 
 ---
 
@@ -318,12 +367,6 @@ Once started, you should see the following in your terminal:
 ```
 Database connected successfully.
 Server is running on port: 5000
-```
-
-You can now access the API at:
-
-```
-http://localhost:5000
 ```
 
 ---
@@ -343,4 +386,5 @@ Import this file into Postman to get all endpoints pre-configured and ready to t
 ## 👤 Author
 
 **Nikeshala Ranathunga**
-Module: Web Services and Server Technology — **IT 2234(P)**
+**Reg No: 2022/ICT/93**
+Module: Web Services and Server Technology — **IT 2234(P)**n
