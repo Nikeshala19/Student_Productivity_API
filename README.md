@@ -387,4 +387,4 @@ Import this file into Postman to get all endpoints pre-configured and ready to t
 
 **Nikeshala Ranathunga**
 **Reg No: 2022/ICT/93**
-Module: Web Services and Server Technology — **IT 2234(P)**n
+Module: Web Services and Server Technology — **IT 2234(P)**
