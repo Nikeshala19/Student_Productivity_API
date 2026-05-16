@@ -298,11 +298,10 @@ export default function Sessions() {
         <div className="flex flex-wrap gap-2 mb-6">
           <button
             onClick={() => setFilterGoal("all")}
-            className={`text-xs px-3 py-1.5 rounded-full font-medium transition ${
-              filterGoal === "all"
-                ? "bg-indigo-600 text-white"
-                : "bg-gray-800 text-gray-400 hover:text-white"
-            }`}
+            className={`text-xs px-3 py-1.5 rounded-full font-medium transition ${filterGoal === "all"
+              ? "bg-indigo-600 text-white"
+              : "bg-gray-800 text-gray-400 hover:text-white"
+              }`}
           >
             All Goals
           </button>
@@ -310,11 +309,10 @@ export default function Sessions() {
             <button
               key={g._id}
               onClick={() => setFilterGoal(g._id)}
-              className={`text-xs px-3 py-1.5 rounded-full font-medium transition ${
-                filterGoal === g._id
-                  ? "bg-indigo-600 text-white"
-                  : "bg-gray-800 text-gray-400 hover:text-white"
-              }`}
+              className={`text-xs px-3 py-1.5 rounded-full font-medium transition ${filterGoal === g._id
+                ? "bg-indigo-600 text-white"
+                : "bg-gray-800 text-gray-400 hover:text-white"
+                }`}
             >
               {g.title}
             </button>
@@ -338,9 +336,8 @@ export default function Sessions() {
               {/* Top row: mood badge + duration */}
               <div className="flex items-center justify-between mb-3">
                 <span
-                  className={`text-xs px-2 py-1 rounded-full font-medium ${
-                    moodColor[session.mood] || "bg-gray-700 text-gray-300"
-                  }`}
+                  className={`text-xs px-2 py-1 rounded-full font-medium ${moodColor[session.mood] || "bg-gray-700 text-gray-300"
+                    }`}
                 >
                   {moodEmoji[session.mood] || "📝"} {session.mood || "—"}
                 </span>
