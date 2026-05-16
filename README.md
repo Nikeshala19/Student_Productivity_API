@@ -57,7 +57,7 @@ This API can power any frontend dashboard or mobile application to give students
 
 ## 📁 Project Structure
 
-
+```
 Student_Productivity_API/
 │
 ├── controllers/
